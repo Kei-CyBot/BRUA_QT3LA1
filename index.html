@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile & Validation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-dark': '#bc6c25',
+                        'brand-light': '#dda15e',
+                        'brand-bg': '#fefae0',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-brand-bg flex items-center justify-center min-h-screen p-4 antialiased">
+
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 transition-all overflow-hidden">
+
+        <div id="loginView">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-slate-800">Login</h1>
+                <p class="text-slate-500 mt-2">Welcome back!</p>
+            </div>
+
+            <form id="loginForm" novalidate class="space-y-6">
+                <div>
+                    <label for="loginUsername" class="block text-sm font-medium text-slate-700 mb-1">Username or Email</label>
+                    <input type="text" id="loginUsername" name="loginUsername"
+                           class="w-full px-4 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-dark focus:border-transparent transition"
+                           required>
+                    <p id="loginError" class="text-red-500 text-xs mt-1 hidden">Error message</p>
+                </div>
+
+                <div>
+                    <label for="loginPassword" class="block text-sm font-medium text-slate-700 mb-1">Password</label>
+                    <input type="password" id="loginPassword" name="loginPassword"
+                           class="w-full px-4 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-dark focus:border-transparent transition"
+                           required>
+                </div>
+
+                <button type="submit"
+                        class="w-full bg-brand-dark text-white py-3 px-4 rounded-lg font-semibold hover:bg-brand-light focus:outline-none focus:ring-2 focus:ring-brand-dark focus:ring-opacity-50 transition duration-200 shadow-md">
+                    Log In
+                </button>
+
+                <div class="flex justify-between items-center text-sm">
+                    <p class="text-slate-600">
+                        Don't have an account? 
+                        <button type="button" id="showRegisterButton" class="font-medium text-brand-dark hover:underline focus:outline-none">
+                            Sign Up
+                        </button>
+                    </p>
+                    <button type="button" id="showForgotButton" class="font-medium text-brand-dark hover:underline focus:outline-none">
+                        Forgot Password?
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div id="registrationView" class="hidden">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-slate-800">Create Profile</h1>
+                <p class="text-slate-500 mt-2">Join our community!</p>
+            </div>
+
+            <form id="profileForm" novalidate class="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
+                
+                <div>
+                    <label for="profileImage" class="block text-sm font-medium text-slate-700 mb-1">Profile Image (Optional)</label>
+                    <input type="file" id="profileImage" name="profileImage" accept="image/*"
+                           class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-brand-bg file:text-brand-dark hover:file:bg-brand-light focus:outline-none focus:ring-2 focus:ring-brand-dark rounded-lg border border-slate-300">
+                    <p id="profileImageError" class="text-red-500 text-xs mt-1 hidden">Error message</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="firstName" class="block text-sm font-medium text-slate-700 mb-1">First Name</label>
+                        <input type="text" id="firstName" name="firstName"
+                               class="w-full px-4 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-dark focus:border-transparent transition"
+                               required>
+                        <p id="firstNameError" class="text-red-500 text-xs mt-1 hidden">Error message</p>
+                    </div>
+                    <div>
+                        <label for="lastName" class="block text-sm font-medium text-slate-700 mb-1">Last Name</label>
+                        <input type="text" id="lastName" name="lastName"
+                               class="w-full px-4 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-dark focus:border-transparent transition"
+                               required>
+                        <p id="lastNameError" class="text-red-500 text-xs mt-1 hidden">Error message</p>
+                    </div>
+                </div>
+                <div>
+                    <label for="middleName" class="block text-sm font-medium text-slate-700 mb-1">Middle Name (Optional)</label>
+                    <input type="text" id="middleName" name="middleName"
+                           class="w-full px-4 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-dark focus:border-transparent transition">
+                </div>
+
+                <div>
+                    <label for="dob" class="block text-sm font-medium text-slate-700 mb-1">Date of Birth</label>
+                    <input type="date" id="dob" name="dob"
+                           class="w-full px-4 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-dark focus:border-transparent transition"
+                           required>
+                    <p id="dobError" class="text-red-500 text-xs mt-1 hidden">Error message</p>
+                </div>
+
+                <div>
+                    <label for="gender" class="block text-sm font-medium text-slate-700 mb-1">Gender</label>
+                    <select id="gender" name="gender"
+                            class="w-full px-4 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-dark focus:border-transparent transition appearance-none"
+                            required>
+                        <option value="">Select Gender</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Non-binary">Non-binary</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                    </select>
+                    <p id="genderError" class="text-red-500 text-xs mt-1 hidden">Error message</p>
+                </div>
+
+                <div>
+                    <label for="cellNum" class="block text-sm font-medium text-slate-700 mb-1">Cell Number (e.g., +1234567890)</label>
+                    <input type="tel" id="cellNum" name="cellNum"
+                           class="w-full px-4 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-dark focus:border-transparent transition"
+                           required>
+                    <p id="cellNumError" class="text-red-500 text-xs mt-1 hidden">Error message</p>
+                </div>
+
+                <div>
+                    <label for="nationality" class="block text-sm font-medium text-slate-700 mb-1">Nationality</label>
+                    <input type="text" id="nationality" name="nationality"
+                           class="w-full px-4 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-dark focus:border-transparent transition"
+                           required>
+                    <p id="nationalityError" class="text-red-500 text-xs mt-1 hidden">Error message</p>
+                </div>
+
+                <div>
+                    <label for="username" class="block text-sm font-medium text-slate-700 mb-1">Username</label>
+                    <input type="text" id="username" name="username"
+                           class="w-full px-4 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-dark focus:border-transparent transition"
+                           required>
+                    <p id="usernameError" class="text-red-500 text-xs mt-1 hidden">Error message</p>
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                    <input type="email" id="email" name="email"
+                           class="w-full px-4 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-dark focus:border-transparent transition"
+                           required>
+                    <p id="emailError" class="text-red-500 text-xs mt-1 hidden">Error message</p>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-slate-700 mb-1">Password</label>
+                    <input type="password" id="password" name="password"
+                           class="w-full px-4 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-dark focus:border-transparent transition"
+                           required>
+                    <p id="passwordError" class="text-red-500 text-xs mt-1 hidden">Error message</p>
+                </div>
+
+                <div>
+                    <label for="confirmPassword" class="block text-sm font-medium text-slate-700 mb-1">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword"
+                           class="w-full px-4 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-dark focus:border-transparent transition"
+                           required>
+                    <p id="confirmPasswordError" class="text-red-500 text-xs mt-1 hidden">Error message</p>
+                </div>
+
+                <button type="submit"
+                        class="w-full bg-brand-dark text-white py-3 px-4 rounded-lg font-semibold hover:bg-brand-light focus:outline-none focus:ring-2 focus:ring-brand-dark focus:ring-opacity-50 transition duration-200 shadow-md">
+                    Create Account
+                </button>
+
+                <p class="text-center text-sm text-slate-600">
+                    Already have an account? 
+                    <button type="button" id="showLoginButton" class="font-medium text-brand-dark hover:underline focus:outline-none">
+                        Log In
+                    </button>
+                </p>
+            </form>
+        </div>
+        
+        <div id="forgotView" class="hidden">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-slate-800">Forgot Password</h1>
+                <p class="text-slate-500 mt-2">Enter your email to reset your password.</p>
+            </div>
+
+            <form id="forgotForm" novalidate class="space-y-6">
+                <div>
+                    <label for="forgotEmail" class="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                    <input type="email" id="forgotEmail" name="forgotEmail"
+                           class="w-full px-4 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-dark focus:border-transparent transition"
+                           required>
+                    <p id="forgotError" class="text-red-500 text-xs mt-1 hidden">Error message</p>
+                    <p id="forgotSuccess" class="text-green-600 text-xs mt-1 hidden">Reset link sent! Check your inbox.</p>
+                </div>
+
+                <button type="submit"
+                        class="w-full bg-brand-dark text-white py-3 px-4 rounded-lg font-semibold hover:bg-brand-light focus:outline-none focus:ring-2 focus:ring-brand-dark focus:ring-opacity-50 transition duration-200 shadow-md">
+                    Send Reset Link
+                </button>
+
+                <p class="text-center text-sm text-slate-600">
+                    Remembered your password? 
+                    <button type="button" id="backToLoginButton" class="font-medium text-brand-dark hover:underline focus:outline-none">
+                        Back to Login
+                    </button>
+                </p>
+            </form>
+        </div>
+
+
+        <div id="profileView" class="hidden">
+            <div class="text-center mb-6">
+                <img id="profilePic" src="https://placehold.co/120x120/E2E8F0/475569?text=Profile" alt="Profile Picture" class="rounded-full shadow-lg mx-auto mb-4 w-32 h-32 object-cover">
+                <h1 class="text-3xl font-bold text-slate-800">Welcome, <span id="profileDisplayName" class="text-brand-dark"></span>!</h1>
+            </div>
+            
+            <div class="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
+                <div class="bg-brand-bg p-4 rounded-lg shadow-sm">
+                    <p class="text-sm font-medium text-slate-500">Username</p>
+                    <p id="profileUsername" class="text-lg text-slate-800 font-semibold"></p>
+                </div>
+                 <div class="bg-brand-bg p-4 rounded-lg shadow-sm">
+                    <p class="text-sm font-medium text-slate-500">Full Name</p>
+                    <p id="profileFullName" class="text-lg text-slate-800 font-semibold"></p>
+                </div>
+                <div class="bg-brand-bg p-4 rounded-lg shadow-sm">
+                    <p class="text-sm font-medium text-slate-500">Email Address</p>
+                    <p id="profileEmail" class="text-lg text-slate-800 font-semibold"></p>
+                </div>
+                 <div class="bg-brand-bg p-4 rounded-lg shadow-sm">
+                    <p class="text-sm font-medium text-slate-500">Cell Number</p>
+                    <p id="profileCellNum" class="text-lg text-slate-800 font-semibold"></p>
+                </div>
+                <div class="bg-brand-bg p-4 rounded-lg shadow-sm">
+                    <p class="text-sm font-medium text-slate-500">Date of Birth</p>
+                    <p id="profileDob" class="text-lg text-slate-800 font-semibold"></p>
+                </div>
+                <div class="bg-brand-bg p-4 rounded-lg shadow-sm">
+                    <p class="text-sm font-medium text-slate-500">Age</p>
+                    <p id="profileAge" class="text-lg text-slate-800 font-semibold"></p>
+                </div>
+                <div class="bg-brand-bg p-4 rounded-lg shadow-sm">
+                    <p class="text-sm font-medium text-slate-500">Gender</p>
+                    <p id="profileGender" class="text-lg text-slate-800 font-semibold"></p>
+                </div>
+                <div class="bg-brand-bg p-4 rounded-lg shadow-sm">
+                    <p class="text-sm font-medium text-slate-500">Nationality</p>
+                    <p id="profileNationality" class="text-lg text-slate-800 font-semibold"></p>
+                </div>
+
+                <button id="logoutButton"
+                        class="w-full bg-slate-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-opacity-50 transition duration-200 shadow-md mt-6">
+                    Log Out
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="successModal" class="modal-hidden fixed inset-0 bg-black/60 items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-800 mb-2">Success!</h2>
+            <p class="text-slate-600 mb-6">Your profile has been created.</p>
+            <button id="closeModalButton"
+                    class="w-full bg-brand-dark text-white py-2 px-4 rounded-lg font-semibold hover:bg-brand-light focus:outline-none focus:ring-2 focus:ring-brand-dark focus:ring-opacity-50 transition duration-200">
+                Go to Login
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
+
